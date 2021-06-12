@@ -57,4 +57,4 @@ News Web App Using Next JS & Bootstrap 5
     └── .env
     
 Back End :
-[Back End](https://github.com/irvanswan/chatify-backend)
+[Back End](https://github.com/irvanswan/newsapp-backend)
