@@ -1,16 +1,29 @@
+/* import { useRouter } from 'next/router'
+
+const Post = () => {
+  const router = useRouter()
+  const { key } = router.query
+
+  return <p>Post: {key}</p>
+}
+
+export default Post */
 import { Navbar, Footer, Header } from "../../component";
 import styles from "../../styles/Home.module.css";
-import axios from "axios";
-import {getNews} from '../../lib/fetchNews' 
+import {searchNews} from '../../lib/fetchNews' 
 import useSWR from 'swr'
+import { useRouter} from 'next/router'
 
-function Article(props) {
+function ArticleSearch(props) {
+  const router = useRouter()
   const initialData = props.data;
+  const key = router.params
   //ini use swr
-  const { data } = useSWR(`${process.env.API_URL}/news`, getNews, {
+  const { data } = useSWR(`${process.env.API_URL}/news/search?key='${key}'`, searchNews, {
     initialData,
   });
-  console.log(data);
+  console.log(data)
+
   return (
     <>
       <Header title="articles" />
@@ -33,7 +46,7 @@ function Article(props) {
         <div className="filter-tags p-0 p-lg-5">
           <h5 className="fw-bold">Latest News</h5>
           <div className="row">
-            {data.data &&
+            {/* {data.data &&
               data.data.map((item) => (
                 <div className="col-12 col-lg-4">
                   <div className="card border-radius border-0 m-3 shadow-lg">
@@ -74,7 +87,7 @@ function Article(props) {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))} */}
           </div>
         </div>
       </section>
@@ -82,14 +95,15 @@ function Article(props) {
     </>
   );
 }
-export const getServerSideProps = async () => {
-  const limit = 6
-  const offset = 1
-  const data = await getNews(`${process.env.API_URL}/news/?limit=${limit}&&offset=${offset}`);
-  return {
+
+export const getServerSideProps = async ({ params }) => {
+  const key = params.key
+  const data = await searchNews(`${process.env.API_URL}/news/search?key=${key}`);
+      return {
     props: { data },
   };
 };
 
 
-export default Article;
+
+export default ArticleSearch;

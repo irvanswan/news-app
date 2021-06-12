@@ -1,8 +1,8 @@
-import fetchJson from '../../lib/fetchJson'
+import axios from 'axios'
 import withSession from '../../lib/session'
 
 export default withSession(async (req, res) => {
-  const { email, password } = await req.body
+  const { email, password } = await req.data
   const newBody = {
       email : email,
       password : password
@@ -12,7 +12,7 @@ export default withSession(async (req, res) => {
   try {
       console.log('udah masuk api login')
     // we check that the user exists on GitHub and store some data in session
-    const { is_login, id_user } = await  fetchJson(url, {
+    const { is_login, id_user } = await axios(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newBody),
@@ -22,7 +22,6 @@ export default withSession(async (req, res) => {
     await req.session.save()
     res.json(user)
   } catch (error) {
-      console.log('belum masuk api login')
     const { response: fetchResponse } = error
     res.status(fetchResponse?.status || 500).json(error.data)
   }

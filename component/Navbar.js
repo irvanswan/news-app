@@ -1,5 +1,21 @@
 import Link from 'next/link'
-export default function Navbar() {
+import {useState} from 'react'
+import { useRouter } from 'next/router'
+import {verifyUser, userLogout} from '../lib/fetchUsers'
+import useSWR from 'swr'
+
+const Navbar = (props) => {
+  const user = props.user
+  const [key, setKey] = useState(null)
+  const router = useRouter()
+  const data = useSWR('api/verify',verifyUser)
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    router.push(`/articles/:key=${key}`)
+  }
+  console.log('ini datanya',data.data)
+ /*  const user= props.user */
+ /* console.log(data) */
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
       <div className="container-fluid">
@@ -53,18 +69,59 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-          <div className="d-flex flex-row me-5">
+          <form className="d-flex" onSubmit={(e)=>handleSubmit(e)}>
+            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={(e)=>setKey(e.target.value)} />
+          </form>
+          {
+            (data.data === null || data.data === undefined) ?(
+              <div className="d-flex flex-row">
             <Link href='/register'>
               <button className="btn mx-5 bg-transparent">Sign up</button>
             </Link>
             <Link href='/login'>
-              <button className="btn btn-blue me-5" type="submit">
+              <button className="btn btn-blue" type="submit">
                 Login
               </button>
             </Link>
           </div>
+            ):(
+              <div className="d-flex flex-row">
+              <button className="btn mx-5 bg-transparent" onClick={()=>userLogout(router)}>Sign up</button>
+          </div>
+            )
+          }
         </div>
       </div>
     </nav>
   );
 }
+
+export const getServerSideProps = async()=>{
+  const user = await fetch('api/user');
+  return{
+    props : {user}
+  }
+ /*  async ({ req, res }) => {
+    const user = req.session.get("user");
+
+    if (!user) {
+      res.statusCode = 404;
+      res.end();
+      return { props: {} };
+    }
+
+    return {
+      props: { user }
+    };
+  },
+  {
+    cookieName: "NEWSAPP-COOKIE",
+    cookieOptions: {
+      secure: process.env.NODE_ENV === "production" ? true : false
+    },
+    password: `${process.env.SECRET_COOKIE_PASSWORD}`
+  } */
+}
+
+
+export default Navbar

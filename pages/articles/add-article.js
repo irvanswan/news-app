@@ -1,35 +1,34 @@
 import { Navbar, Footer, Header } from "../../component";
 import axios from "axios";
 import { useState } from "react";
-
+import { addNews} from '../../lib/fetchNews'
 function AddArticle({ categories, error }) {
-  console.log(categories)
+  const [loading, setLoading] = useState(false)
   const [modifiedData, setModifiedData] = useState({
     title: "",
     text_news: "",
     category: "",
     poster: [],
   });
-  const newFormData = () =>{
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let id_user = 1
+    const formData = new FormData();
+    const image = modifiedData.poster[0]
     formData.append("title", modifiedData.title);
     formData.append("text_news", modifiedData.text_news);
     formData.append("category", modifiedData.category);
     formData.append("tags", modifiedData.category);
-    formData.append("poster", modifiedData.poster[0]);
-    /* for(let i=0; i < modifiedData.poster.length; i++){
-      formData.append("poster", modifiedData.poster[i])
-    } */
-}
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    newFormData()
-    try {
-      const response = await axios.post(`${process.env.API_URL}/news/add-news/1`,formData);
-      console.log(response);
-    } catch (error) {
-      console.log(modifiedData)
-    }
+    formData.append("poster", image);
+    console.log(modifiedData.poster[0])
+   try {
+      const response = await addNews(
+        `http://localhost:3333/news/api/news/add-news/${id_user}`,
+        formData,
+        setLoading
+      );
+    } catch (error) {}
   };
   return (
     <>
@@ -111,7 +110,7 @@ function AddArticle({ categories, error }) {
                     class="form-control"
                     placeholder="Leave a comment here"
                     id="floatingTextarea"
-                    onChange={(e)=>setModifiedData({text_news:e.target.value})}
+                    onChange={(e)=>setModifiedData({...modifiedData, text_news:e.target.value})}
                   ></textarea>
                   <label for="floatingTextarea">Text</label>
                 </div>

@@ -1,7 +1,14 @@
-  
-import withSession from '../../lib/session'
+import { withIronSession } from "next-iron-session";
 
-export default withSession(async (req, res) => {
-  req.session.destroy()
-  res.json({ isLoggedIn: false })
-})
+function handler(req, res, session) {
+  req.session.destroy();
+  res.send("Logged out");
+}
+
+export default withIronSession(handler, {
+    cookieName: "NEWSAPP-COOKIE",
+    cookieOptions: {
+      secure: process.env.NODE_ENV === "production" ? true : false
+    },
+    password: `${process.env.SECRET_COOKIE_PASSWORD}`
+});

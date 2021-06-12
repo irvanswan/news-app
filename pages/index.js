@@ -4,10 +4,13 @@ import styles from "../styles/Home.module.css";
 import { getNews } from "../lib/fetchNews";
 import useSWR from "swr";
 
+
 function Home(props) {
+  const limit = 10
+  const offset = 1
   const initialData = props.data;
   //ini use swr
-  const { data } = useSWR(`${process.env.API_URL}/news`, getNews, {
+  const { data } = useSWR(`${process.env.API_URL}/news/?limit=${limit}&&offset=${offset}`, getNews, {
     initialData,
   });
   console.log(data);
@@ -318,7 +321,9 @@ function Home(props) {
 }
 //getServerSideProps
 export const getServerSideProps = async () => {
-  const data = await getNews(`${process.env.API_URL}/news`);
+  const limit = 10
+  const offset = 1
+  const data = await getNews(`${process.env.API_URL}/news/?limit=${limit}&&offset=${offset}`);
   return {
     props: { data },
   };
