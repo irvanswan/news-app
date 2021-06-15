@@ -18,11 +18,12 @@ News Web App Using Next JS & Bootstrap 5, We can post, comment, and like the art
 6. etc ( please wait on next update :) )
 
 ## Screen Shoot
-
 |Dekstop|Mobile|
 |-|-|
 |Dashboard||
 |![Desktop](https://user-images.githubusercontent.com/49930719/121777795-0f8c2680-cbbe-11eb-8e64-c476611192ae.PNG)|![Mobile](https://user-images.githubusercontent.com/49930719/121777811-26327d80-cbbe-11eb-8b21-7777bfaa5b64.PNG)|
+|Dashboard After Login||
+|![Desktop2](https://user-images.githubusercontent.com/49930719/122062582-be786e80-ce19-11eb-9161-f467cf6cc79e.PNG)|# Coming Soon #|
 |Login Page||
 |![Dekstop](https://user-images.githubusercontent.com/49930719/121777825-35b1c680-cbbe-11eb-82d4-f2c73fece9b1.PNG)|# Coming Soon #|
 |Register Page||
