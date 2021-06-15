@@ -33,7 +33,7 @@ function AddArticle({ categories, error }) {
   return (
     <>
       <Header title="articles" />
-      <Navbar />
+      <Navbar state='articles' />
       <section className="container-fluid p-0">
         <div className="d-flex justify-content-between m-5">
           <div>

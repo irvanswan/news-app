@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400&display=swap');
 :root{
+    font-family: 'Nunito', sans-serif;
     --customblue : #376AED !important;
     --fontblue : #2D4379 !important;
     --customdark : #0D253C !important;
@@ -7,7 +8,35 @@
     --customgrey : #D7DDEC !important;
 }
 body{
-    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box !important;
+}
+main{
+    box-sizing: border-box !important;
+}
+.cursor-pointer:hover{
+    cursor: pointer;
+}
+.poster-overfow{
+    max-height: 5em;
+    overflow-y: hidden;
+}
+.poster-overflow image{
+    width: 100%;
+    background-size: cover;
+}
+.text-justify{
+    text-align: justify !important;
+}
+.active{
+    font-weight: 600 !important;
+}
+.icon-1{
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+.photo{
+    width: 2.5em !important;
+    height: 2.5em !important;
 }
 .bg-grey{
     background-color: var(--customgrey) !important;
@@ -32,6 +61,7 @@ body{
     background-color: var(--custombluelight) !important;
     color: white;
 }
+
 .text-blue{
     color: #2D4379;
 }

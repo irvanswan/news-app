@@ -14,9 +14,9 @@ function Article(props) {
   return (
     <>
       <Header title="articles" />
-      <Navbar />
-      <section className="container-fluid p-0">
-        <div className={`${styles.banner2} m-0`}>
+      <Navbar state='articles'/>
+      <main className="container-fluid p-0 pt-5">
+        <section className={`${styles.banner2} m-0`}>
           <div className={`${styles.content2} m-0`}>
             <div className="col-md-12 col-lg-5 p-5">
               <h1 className="mt-5">Start Writing an Article</h1>
@@ -29,7 +29,7 @@ function Article(props) {
               <button className="btn btn-blue p-3 mt-4">Start Exploring</button>
             </div>
           </div>
-        </div>
+        </section>
         <div className="filter-tags p-0 p-lg-5">
           <h5 className="fw-bold">Latest News</h5>
           <div className="row">
@@ -77,7 +77,7 @@ function Article(props) {
               ))}
           </div>
         </div>
-      </section>
+      </main>
       <Footer />
     </>
   );

@@ -1,25 +1,26 @@
 import axios from "axios";
 import { Navbar, Footer, Header } from "../component";
 import styles from "../styles/Home.module.css";
-import { getNews } from "../lib/fetchNews";
+/* import { getNews } from "../lib/fetchNews"; */
 import useSWR from "swr";
-
+import Fetcher from "../lib/fetcher";
+import { useUser } from "./api/users";
 
 function Home(props) {
   const limit = 10
   const offset = 1
-  const initialData = props.data;
-  //ini use swr
-  const { data } = useSWR(`${process.env.API_URL}/news/?limit=${limit}&&offset=${offset}`, getNews, {
+  const initialData = props.news;
+  //ini use sw
+  /* const { news: data } = fetchNews({limit:limit, offset : offset}) */
+  const { data } = useSWR(`${process.env.API_URL}/news/?limit=${limit}&&offset=${offset}`, Fetcher({method:'GET', url:`${process.env.API_URL}/news/`,params:{limit:limit, offset:offset}}), {
     initialData,
   });
-  console.log(data);
 
   return (
     <>
       <Header title="Dashboard" />
-      <Navbar />
-      <section className="container-fluid p-0">
+      <Navbar state='home'/>
+      <section className="container-fluid p-0 pt-5">
         <div className={styles.banner}>
           <div className="col-md-12 col-lg-5 my-5 p-5">
             <h1>Share Information and Educate People</h1>
@@ -323,9 +324,9 @@ function Home(props) {
 export const getServerSideProps = async () => {
   const limit = 10
   const offset = 1
-  const data = await getNews(`${process.env.API_URL}/news/?limit=${limit}&&offset=${offset}`);
+  const news = await Fetcher({method:'GET', url:`${process.env.API_URL}/news/`,params:{limit:limit, offset:offset}});
   return {
-    props: { data },
+    props: { news },
   };
 };
 export default Home;

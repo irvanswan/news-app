@@ -27,7 +27,7 @@ function ArticleSearch(props) {
   return (
     <>
       <Header title="articles" />
-      <Navbar />
+      <Navbar state='articles'/>
       <section className="container-fluid p-0">
         <div className={`${styles.banner2} m-0`}>
           <div className={`${styles.content2} m-0`}>

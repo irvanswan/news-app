@@ -20,4 +20,4 @@
     height: 2em!important;
 }
 .line { width:100%; text-align:center; border-bottom: 2px solid #9DB6F6; line-height:0.1em; margin:10px 0 20px; } 
-.line span, .line small { background:#fff; padding:0 10px; }
+.line span, .line small { background:transparent; padding:0 10px; }
