@@ -3,9 +3,13 @@ import { Footer, Header } from "../../component";
 import Link from "next/link";
 import { useState } from "react";
 import { userRegister } from "../../lib/fetchUsers";
+import { Modal, Button} from "react-bootstrap";
+import Fetcher from "../../lib/fetcher";
 
 
 export default function Register() {
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -14,12 +18,29 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
-      const response = await userRegister(
+      const response = await Fetcher({
+        method : 'POST',
+        url  : `${process.env.API_URL}/auth/Register`,
+        data : data
+      });
+      if(response.status == 201){
+        setLoading(false);
+        /*  alert(result.data.message); */
+        setMessage(response.message);
+        setShow(true);
+      }else{
+        setLoading(false);
+        /*  alert(result.data.message); */
+        setMessage(result.message);
+        setShow(true);
+      }
+      /* const response = await userRegister(
         `${process.env.API_URL}/auth/register`,
         data,
         setLoading
-      );
+      ); */
     } catch (error) {}
   };
   return (
@@ -141,6 +162,29 @@ export default function Register() {
           </main>
         </section>
         <Footer />
+        <Modal
+          show={show}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        onHide={() => setShow(false)}
+      >
+        <div className='border-radius-10'>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <h1 className="navbar-brand fw-bold" href="#">
+                News Today
+              </h1>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className='py-3 px-3'>
+            {/* <Image className="icon mx-4" src="/images/face1.png" /> */}
+            <div className="d-flex flex-row bd-highlight mb-3">
+              <h3 className="mx-auto w-100 text-danger text-center align-self-center">{message}</h3>
+            </div>
+            <Button onClick={() => setShow(false)} className='float-end my-3'>Close</Button>
+          </Modal.Body>
+        </div>
+      </Modal>
       </body>
     </>
   );

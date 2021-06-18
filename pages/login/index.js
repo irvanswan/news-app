@@ -90,7 +90,7 @@ export default function Login() {
                       </span>
                     </div>
                   </form>
-                  <div className="d-flex justify-content-center mt-5">
+                  <div className="d-flex justify-content-center mx-1 mt-5">
                         <div className="px-5">
                           <img src="./icon/Google.svg" className="icon" />
                         </div>
@@ -101,8 +101,8 @@ export default function Login() {
                           <img src="./icon/Twitter.svg" className="icon" />
                         </div>
                       </div>
-                      <div className="line my-5">
-                        <span className="text-info">
+                      <div className={`${styles.line} my-5`}>
+                        <span className="text-info bg-white">
                           Don’t have an account?
                         </span>
                       </div>

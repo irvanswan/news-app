@@ -83,6 +83,20 @@ main{
     border: 1px dashed rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
 }
+.background{
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 25%;
+ }
+/*  .background label{
+     z-index: 2;
+     color: white;
+     width: 60%;
+ } */
+.mh-15{
+    max-height: 15% !important;
+}
 input[type="file"] {
     display: none;
 }
