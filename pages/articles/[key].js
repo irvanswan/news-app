@@ -1,33 +1,24 @@
-/* import { useRouter } from 'next/router'
-
-const Post = () => {
-  const router = useRouter()
-  const { key } = router.query
-
-  return <p>Post: {key}</p>
-}
-
-export default Post */
 import { Navbar, Footer, Header } from "../../component";
 import styles from "../../styles/Home.module.css";
-import {searchNews} from '../../lib/fetchNews' 
+import {searchNews} from '../api/news' 
 import useSWR from 'swr'
 import { useRouter} from 'next/router'
+import { useEffect } from "react";
 
-function ArticleSearch(props) {
+const ArticleSearch = () =>{
   const router = useRouter()
-  const initialData = props.data;
-  const key = router.params
+  const key = router.query
   //ini use swr
-  const { data } = useSWR(`${process.env.API_URL}/news/search?key='${key}'`, searchNews, {
-    initialData,
-  });
+  const {news:data, mutateNews, errNews} = searchNews({key})
+  useEffect(()=>{
+    mutateNews(news)
+  },[router.query])
   console.log(data)
 
   return (
     <>
       <Header title="articles" />
-      <Navbar state='articles'/>
+      <Navbar state='articles' url='../api/verify'/>
       <section className="container-fluid p-0">
         <div className={`${styles.banner2} m-0`}>
           <div className={`${styles.content2} m-0`}>
@@ -46,8 +37,8 @@ function ArticleSearch(props) {
         <div className="filter-tags p-0 p-lg-5">
           <h5 className="fw-bold">Latest News</h5>
           <div className="row">
-            {/* {data.data &&
-              data.data.map((item) => (
+            {data?.data &&
+              data?.data?.map((item) => (
                 <div className="col-12 col-lg-4">
                   <div className="card border-radius border-0 m-3 shadow-lg">
                     <div className="row">
@@ -87,7 +78,7 @@ function ArticleSearch(props) {
                     </div>
                   </div>
                 </div>
-              ))} */}
+              ))}
           </div>
         </div>
       </section>
@@ -95,15 +86,5 @@ function ArticleSearch(props) {
     </>
   );
 }
-
-export const getServerSideProps = async ({ params }) => {
-  const key = params.key
-  const data = await searchNews(`${process.env.API_URL}/news/search?key=${key}`);
-      return {
-    props: { data },
-  };
-};
-
-
 
 export default ArticleSearch;

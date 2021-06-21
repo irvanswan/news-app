@@ -7,13 +7,13 @@ export const useUser = (id_user) =>{
         url:`${process.env.API_URL}/users/`,
         params:{id : id_user}
     });
-    const {data, mutate, error} = useSWR(id_user?'get user':null, getUser, {})
+    const {data, mutate, error} = useSWR(id_user?'get user':null, getUser, {refreshInterval: 100 })
     const loading = !data & !error
-    console.log('undefined',data)
     return {
         user: data,
         mutateUser: mutate,
         errUser: error,
+        isLoggedIn: !data ? true : false,
         loadUser: loading
     }
 }

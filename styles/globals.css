@@ -38,6 +38,10 @@ main{
     width: 2.5em !important;
     height: 2.5em !important;
 }
+.avatar{
+    width: 6em !important;
+    height: 6em !important;
+}
 .bg-grey{
     background-color: var(--customgrey) !important;
 }
@@ -48,6 +52,10 @@ main{
 }
 .border-radius{
     border-radius: 15px !important;
+}
+.border-radius-top{
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
 }
 .btn-dark{
     background-color: var(--customdark) !important;
@@ -87,7 +95,7 @@ main{
     background-size: cover;
     overflow: hidden;
     width: 100%;
-    height: 25%;
+    height: 25vh;
  }
 /*  .background label{
      z-index: 2;

@@ -1,13 +1,26 @@
-const savedPost = () => {
+const SavedPost = () => {
+  const data = [
+  {
+   message:'success'
+  },
+  {
+    message:'success'
+   },
+   {
+    message:'success'
+   },
+   {
+    message:'success'
+   }]
   return (
     <>
-      <h5 className="text-center text-primary">Saved Post</h5>
-      <div className="row mt-5">
-        <div className="col-12 col-lg-4 card border-radius mx-2 p-0">
-          {/* start content */}
+      <h5 className="text-center text-primary mt-5">Saved Post</h5>
+      <div className="row mt-5 mx-3">
+      {data.map((element)=>(
+        <div className="col-12 col-lg-4 card border-radius m-2 p-0">
           <div className="d-flex flex-column bd-highlight mb-3">
-            <div className="bd-highlight poster-overfow">
-              <img src="./images/corona.png" alt="..." className="" />
+            <div className="bd-highlight poster-overfow overflow-hidden border-radius-top">
+              <img src="./images/unsplash.png" alt="..." />
             </div>
             <div className="p-2 bd-highlight text-center">
               <span className="text-primary fw-bolder">COVID-19</span>
@@ -35,9 +48,10 @@ const savedPost = () => {
             </div>
           </div>
         </div>
+        ))}
       </div>
     </>
   );
 };
 
-export default savedPost
+export default SavedPost

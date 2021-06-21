@@ -2,9 +2,12 @@ import styles from "../../styles/auth.module.css";
 import { Footer, Header } from "../../component";
 /* import useUser from '../../lib/useUser' */
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { userLogin } from "../../lib/fetchUsers";
+import { verifyUser } from "../../lib/fetchUsers";
+import useSWR from "swr";
+
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -13,7 +16,18 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const verify = useSWR("api/verify", verifyUser);
 
+  useEffect(async()=>{
+    let promise = new Promise((resolve, reject)=>{
+      setTimeout(() => resolve(verify),100)
+    })
+    let result = await promise
+    if(result?.data){
+      router.replace('/')
+    }
+  },[verify])
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -25,16 +39,6 @@ export default function Login() {
       );
       console.log(response);
     } catch (error) {}
-    /* userLogin() */
-    /* const response = await fetch("/api/session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
-
-    if(response.ok){
-      return router.push('/')
-    } */
   };
   return (
     <>

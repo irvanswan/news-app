@@ -3,14 +3,20 @@ import styles from "../../styles/Home.module.css";
 import axios from "axios";
 import {getNews} from '../../lib/fetchNews' 
 import useSWR from 'swr'
+import {useRouter} from 'next/router'
+import { searchNews } from "pages/api/news";
+import { useEffect } from "react";
 
 function Article(props) {
+  const router = useRouter()
   const initialData = props.data;
   //ini use swr
-  const { data } = useSWR(`${process.env.API_URL}/news`, getNews, {
-    initialData,
-  });
-  console.log(data);
+  const {key} = router.query
+  const {news:data, mutateNews, errNews} = searchNews({key},initialData)
+  useEffect(()=>{
+    mutateNews(data)
+  },[key])
+
   return (
     <>
       <Header title="articles" />
@@ -26,15 +32,15 @@ function Article(props) {
                 member for three months.
               </span>
               <br />
-              <button className="btn btn-blue p-3 mt-4">Start Exploring</button>
+              <button className="btn btn-blue p-3 mt-4">Start Writing</button>
             </div>
           </div>
         </section>
         <div className="filter-tags p-0 p-lg-5">
           <h5 className="fw-bold">Latest News</h5>
           <div className="row">
-            {data.data &&
-              data.data.map((item) => (
+            {data?.data &&
+              data?.data?.map((item) => (
                 <div className="col-12 col-lg-4">
                   <div className="card border-radius border-0 m-3 shadow-lg">
                     <div className="row">

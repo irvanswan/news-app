@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import { verifyUser, userLogout } from "../lib/fetchUsers";
 import useSWR from "swr";
 import { useUser } from "../pages/api/users";
 
 const Navbar = (props) => {
   const [key, setKey] = useState(null);
-  const router = useRouter();
-  const data = useSWR("api/verify", verifyUser);
+  const data = useSWR(props.url??'api/verify', verifyUser);
   const id_user = data?.data?.id_user;
   const { user, mutateUser, errUser } = useUser(id_user);
 
@@ -32,8 +31,12 @@ const Navbar = (props) => {
   }, [props]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    router.push(`/articles/:key=${key}`);
+    e.preventDefault()
+    Router.push({
+      pathname: '/articles',
+      query: { key: key},
+    })
+    /* router.push(`/articles/${key}`); */
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
@@ -181,7 +184,7 @@ const Navbar = (props) => {
                     <li>
                       <a
                         className="dropdown-item text-danger cursor-pointer"
-                        onClick={() => userLogout(router)}
+                        onClick={() => userLogout(Router)}
                       >
                         LogOut
                       </a>

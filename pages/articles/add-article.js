@@ -1,8 +1,16 @@
 import { Navbar, Footer, Header } from "../../component";
 import axios from "axios";
 import { useState } from "react";
-import { addNews} from '../../lib/fetchNews'
+import Fetcher from "../../lib/fetcher";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+
 function AddArticle({ categories, error }) {
+  const router = useRouter();
+  const data = useSWR("../api/verify");
+  const id_user = data?.data?.id_user;
+  const token_user = data?.data?.token;
+  console.log(id_user)
   const [loading, setLoading] = useState(false)
   const [modifiedData, setModifiedData] = useState({
     title: "",
@@ -13,7 +21,6 @@ function AddArticle({ categories, error }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let id_user = 1
     const formData = new FormData();
     const image = modifiedData.poster[0]
     formData.append("title", modifiedData.title);
@@ -23,17 +30,24 @@ function AddArticle({ categories, error }) {
     formData.append("poster", image);
     console.log(modifiedData.poster[0])
    try {
-      const response = await addNews(
+      /* const response = await addNews(
         `http://localhost:3333/news/api/news/add-news/${id_user}`,
         formData,
         setLoading
-      );
+      ); */
+      const response = await Fetcher({
+        method:'POST',
+        url:`${process.env.API_URL}/news/add-news/${id_user}`,
+        headers : {'user-token' : token_user},
+        data:formData,
+      })
+      console.log(response);
     } catch (error) {}
   };
   return (
     <>
-      <Header title="articles" />
-      <Navbar state='articles' />
+      <Header title="articles" url='../icon/Google.svg'/>
+      <Navbar state='articles' url='../api/verify'/>
       <section className="container-fluid p-0">
         <div className="d-flex justify-content-between m-5">
           <div>

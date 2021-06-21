@@ -1,10 +1,8 @@
-import axios from "axios";
 import { Navbar, Footer, Header } from "../component";
 import styles from "../styles/Home.module.css";
-/* import { getNews } from "../lib/fetchNews"; */
 import useSWR from "swr";
 import Fetcher from "../lib/fetcher";
-import { useUser } from "./api/users";
+import Link from 'next/link'
 
 function Home(props) {
   const limit = 10
@@ -12,9 +10,10 @@ function Home(props) {
   const initialData = props.news;
   //ini use sw
   /* const { news: data } = fetchNews({limit:limit, offset : offset}) */
-  const { data } = useSWR(`${process.env.API_URL}/news/?limit=${limit}&&offset=${offset}`, Fetcher({method:'GET', url:`${process.env.API_URL}/news/`,params:{limit:limit, offset:offset}}), {
+  const { data } = useSWR(null, Fetcher({method:'GET', url:`${process.env.API_URL}/news/`,params:{limit:limit, offset:offset}}), {
     initialData,
   });
+  console.log(data)
 
   return (
     <>
@@ -30,7 +29,7 @@ function Home(props) {
               prespective of something to the world.
             </span>
             <br />
-            <button className="btn btn-blue p-3 mt-4">Start Exploring</button>
+            <Link href='/articles'><button className="btn btn-blue p-3 mt-4">Start Exploring</button></Link>
           </div>
         </div>
         <div className={styles.filter}>
@@ -297,10 +296,12 @@ function Home(props) {
                                 <img src="./icon/Like.svg" alt="..." />
                                 <small> 2.1k</small>
                               </div>
+                              <Link href={`/${item.id}`}>
                               <div className="p-2 bd-highlight">
                                 <img src="./icon/Clock.svg" alt="..." />
                                 <small> 2.1k</small>
                               </div>
+                              </Link>
                               <div className="p-2 bd-highlight">
                                 <img src="./icon/Borkmark.svg" alt="..." />
                                 <small> 2.1k</small>
