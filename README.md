@@ -32,6 +32,9 @@ News Web App Using Next JS & Bootstrap 5, We can post, comment, and like the art
 |![Dekstop](https://user-images.githubusercontent.com/49930719/121778015-1b2c1d00-cbbf-11eb-8229-b72c9a87a937.PNG)|![Mobile](https://user-images.githubusercontent.com/49930719/121778078-69412080-cbbf-11eb-9c10-989f82af3522.PNG)|
 |Articles||
 |![Dekstop](https://user-images.githubusercontent.com/49930719/121778119-b1604300-cbbf-11eb-9079-0b698d318388.PNG)|![Mobile](https://user-images.githubusercontent.com/49930719/121778129-c210b900-cbbf-11eb-9425-e7baac6c0eac.PNG)|
+|Profile||
+|Update Profile||
+|![Dekstop](https://user-images.githubusercontent.com/49930719/122579247-ecaab800-d07e-11eb-9ef3-d7edcc55f87d.PNG)|![Mobile](https://user-images.githubusercontent.com/49930719/122579393-0f3cd100-d07f-11eb-9137-e81c1e832da8.PNG)|
 
 ## Folder Structure
 
