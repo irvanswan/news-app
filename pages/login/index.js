@@ -1,12 +1,16 @@
 import styles from "../../styles/auth.module.css";
 import { Footer, Header } from "../../component";
-/* import useUser from '../../lib/useUser' */
+import GoogleLogin from "react-google-login";
+import FacebookLogin from 'react-facebook-login';
+import TwitterLogin from "react-twitter-login";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { userLogin } from "../../lib/fetchUsers";
+import { userLogin, googleLogin } from "../../lib/fetchUsers";
 import { verifyUser } from "../../lib/fetchUsers";
 import useSWR from "swr";
+import Fetcher from "lib/fetcher";
+import axios from "axios";
 
 
 export default function Login() {
@@ -27,7 +31,20 @@ export default function Login() {
       router.replace('/')
     }
   },[verify])
-  
+  const responseGoogle = async(response) => {
+   if(response.error == undefined && !response.error){
+      
+      const result = await Fetcher({
+        method : 'GET',
+        url : `${process.env.API_URL}/auth/google`,
+        params : {token : response.tokenId}
+      })
+      googleLogin(result.data, setLoading, router)
+    }
+  }
+  const responseFacebook = (response) => {
+    console.log(response);
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -96,11 +113,31 @@ export default function Login() {
                   </form>
                   <div className="d-flex justify-content-center mx-1 mt-5">
                         <div className="px-5">
+                        <GoogleLogin
+                        clientId={`${process.env.GOOGLE_CLIENT_ID}`}
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        icon={false}
+                        tag='span'
+                        className='border-0 shadow-none'
+                        type='submit'
+                        >
                           <img src="./icon/Google.svg" className="icon" />
+                        </GoogleLogin>
                         </div>
+
                         <div className="px-5">
-                          <img src="./icon/Facebook.svg" className="icon" />
+                          <FacebookLogin
+                          clientId={`${process.env.FACEBOOK_CLIENT_ID}`}
+                          autoLoad={true}
+                          fields="name,email,picture"
+                          callback={responseFacebook} 
+                          icon={<img src="./icon/Facebook.svg" className="icon" />}
+                          cssClass='border-0 shadow-none bg-transparent'
+                          textButton=''
+                          />
                         </div>
+
                         <div className="px-5">
                           <img src="./icon/Twitter.svg" className="icon" />
                         </div>

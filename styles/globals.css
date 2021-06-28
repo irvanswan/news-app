@@ -95,7 +95,13 @@ main{
     background-size: cover;
     overflow: hidden;
     width: 100%;
-    height: 25vh;
+    /*height: 25vh;*/
+ }
+ .vh-25{
+     height: 25vh;
+ }
+ .vh-35{
+     height: 35vh;
  }
 /*  .background label{
      z-index: 2;

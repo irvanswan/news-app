@@ -86,7 +86,7 @@ const EditProfile = () => {
   return (
     <>
       <div className="position-relative z1 h-auto">
-        <div className="background">
+        <div className="background vh-25">
           <img
             src={
               user?.data?.bg_profile != null
