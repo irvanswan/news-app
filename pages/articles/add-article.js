@@ -1,20 +1,14 @@
 import { getIronSession } from "pages/api/getSession";
-import { useUser } from "pages/api/users";
 import { Navbar, Footer, Header, Editor } from "../../component";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Fetcher from "../../lib/fetcher";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 
 function AddArticle({ categories, error }) {
   const [editorLoaded, setEditorLoaded] = useState(false);
   const {session} = getIronSession();
   const id_user = session?.id_user
   const token_user = session?.token
-  /* const data = useSWR("../api/verify");
-  const id_user = data?.data?.id_user;
-  const token_user = data?.data?.token; */
   const [loading, setLoading] = useState(false);
   const [modifiedData, setModifiedData] = useState({
     title: "",
@@ -51,11 +45,11 @@ function AddArticle({ categories, error }) {
     <>
       <Header title="articles" url="../icon/Google.svg" />
       <Navbar state="articles" url="../api/verify" path=".." />
-      <section className="container-fluid p-0">
+      <section className="container-fluid p-0 pt-5">
         <div className="d-flex justify-content-between m-5">
           <div>
             <img src="../../icon/Back.svg" />
-            <span>Back</span>
+            <span> Back</span>
           </div>
           <div>
             <h3 className="fw-bold">Write Article</h3>

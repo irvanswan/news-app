@@ -1,3 +1,4 @@
+import { getIronSession } from "pages/api/getSession";
 import { useState, useEffect } from "react";
 import useSWR from "swr";
 import Fetcher from "../../../lib/fetcher";
@@ -5,9 +6,12 @@ import { verifyUser } from "../../../lib/fetchUsers";
 import { useUser } from "../../api/users";
 
 const EditProfile = () => {
-	const data = useSWR("api/verify", verifyUser);
+  const {session} = getIronSession();
+  const id_user = session?.id_user;
+  const token_user = session?.token;
+/* 	const data = useSWR("api/verify", verifyUser);
 	const id_user = data?.data?.id_user;
-	const token_user = data?.data?.token;
+	const token_user = data?.data?.token; */
   const [background, setBackground] = useState([]);
   const [photo, setPhoto] = useState([]);
 	const { user, mutateUser, errUser } = useUser(id_user);
@@ -21,6 +25,7 @@ const EditProfile = () => {
   })
 
 	useEffect(()=>{
+    console.log('ini data buat updarte bg', id_user,token_user)
     const formData = new FormData()
     if(photo.name != undefined){
       formData.append(`photo`, photo)

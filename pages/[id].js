@@ -13,7 +13,7 @@ const DetailNews = () => {
     <>
       <Header title={id} />
       <body>
-        <Navbar state="home" />
+        <Navbar state="home" path='.'/>
         <main className="mt-5">
           <section className="px-5">
             <div className="d-flex flex-row pt-5">
