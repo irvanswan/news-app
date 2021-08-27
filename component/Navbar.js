@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Router from "next/router";
-import { verifyUser, userLogout } from "../lib/fetchUsers";
-import useSWR from "swr";
+import { userLogout } from "../lib/fetchUsers";
 import { useUser } from "../pages/api/users";
+import { getIronSession } from "pages/api/getSession";
 
 const Navbar = (props) => {
+  const path = props.path ?? "."
   const [key, setKey] = useState(null);
-  const data = useSWR(props.url??'api/verify', verifyUser);
-  const id_user = data?.data?.id_user;
+  const {session} = getIronSession();
+  const id_user = session?.id_user;
   const { user, mutateUser, errUser } = useUser(id_user);
-
+  console.log('id_user', id_user)
   useEffect(() => {
     switch (props.state) {
       case "home":
@@ -29,6 +30,10 @@ const Navbar = (props) => {
         break;
     }
   }, [props]);
+
+  useEffect(()=>{
+    mutateUser()
+  },[])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -100,7 +105,7 @@ const Navbar = (props) => {
               onChange={(e) => setKey(e.target.value)}
             />
           </form>
-          {data.data === null || data.data === undefined ? (
+          {session === null || session === undefined ? (
             <div className="d-flex flex-row">
               <Link href="/register">
                 <button className="btn mx-5 bg-transparent cursor-pointer">
@@ -117,7 +122,7 @@ const Navbar = (props) => {
             <div className="d-flex flex-row">
               <div className="dropdown">
                 <img
-                  src="./icon/Bell.svg"
+                  src={`${props.path}/icon/Bell.svg`}
                   className="icon-1 ms-2 mt-3 cursor-pointer dropdown-toggle"
                   id="dropdownMenuButton2"
                   data-bs-toggle="dropdown"

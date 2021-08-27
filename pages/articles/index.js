@@ -20,7 +20,7 @@ function Article(props) {
   return (
     <>
       <Header title="articles" />
-      <Navbar state='articles'/>
+      <Navbar state='articles' path="."/>
       <main className="container-fluid p-0 pt-5">
         <section className={`${styles.banner2} m-0`}>
           <div className={`${styles.content2} m-0`}>

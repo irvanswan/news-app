@@ -18,7 +18,7 @@ const ArticleSearch = () =>{
   return (
     <>
       <Header title="articles" />
-      <Navbar state='articles' url='../api/verify'/>
+      <Navbar state='articles' url='../api/verify' path="."/>
       <section className="container-fluid p-0">
         <div className={`${styles.banner2} m-0`}>
           <div className={`${styles.content2} m-0`}>

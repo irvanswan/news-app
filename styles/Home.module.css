@@ -37,3 +37,8 @@
   max-width: 8em !important;
   max-height: 100% !important;
 }
+
+.pamflet{
+  width: 10em;
+  height: 15em;
+}

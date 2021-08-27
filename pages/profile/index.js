@@ -4,25 +4,25 @@ import { userLogout, verifyUser } from "../../lib/fetchUsers";
 import { useUser } from "../api/users";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import Fetcher from "../../lib/fetcher";
 import { EditProfile, SavedPost, Faq , Help } from "./component";
+import { getIronSession } from "pages/api/getSession";
 
 const Profile = () => {
   const router = useRouter();
   const [menu, setMenu] = useState('profile')
-  const data = useSWR("api/verify", verifyUser);
-  const id_user = data?.data?.id_user;
+  const {session} = getIronSession();
+  const id_user = session?.id_user;
   const { user, mutateUser, errUser } = useUser(id_user);
 
   useEffect(async()=>{
     let promise = new Promise((resolve, reject)=>{
-      setTimeout(() => resolve(data),100)
+      setTimeout(() => resolve(session),1000)
     })
     let result = await promise
-    if(!result?.data){
+    if(!result){
       router.replace('/login')
     }
-  },[data])
+  },[session])
 
   const reset = () =>{
     document.getElementById('editProfile').classList.remove("btn-blue-light");
@@ -59,7 +59,7 @@ console.log(menu)
   return (
     <>
       <Header title="Profile" />
-      <Navbar state="profile" />
+      <Navbar state="profile" path="."/>
       <body>
         <main className="container-fluid">
           <div className="row mt-5">

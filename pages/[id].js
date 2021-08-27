@@ -76,7 +76,7 @@ const DetailNews = () => {
                     <h5>Comments</h5>
                     <div class="d-flex flex-row bd-highlight mb-3">
                       <div class="p-2 bd-highlight">
-                        <img src="./images/no-photo.png" className="avatar" />
+                        <img src="./images/no-photo.png" className="photo" />
                       </div>
                       <div class="p-2 bd-highlight w-100">
                         <label
@@ -92,15 +92,15 @@ const DetailNews = () => {
                         />
                       </div>
                       <div class="p-2 bd-highlight">
-                        <button className="btn text-primary bg-transparent my-3">
-                          Submit
+                        <button className="btn text-primary bg-transparent my-4">
+                          <small>Submit</small>
                         </button>
                       </div>
                     </div>
 
                     <div class="d-flex flex-row bd-highlight mb-3">
                       <div class="p-2 bd-highlight">
-                        <img src="./images/no-photo.png" className="avatar" />
+                        <img src="./images/no-photo.png" className="photo" />
                       </div>
                       <div class="p-2 bd-highlight w-100">
                         <label

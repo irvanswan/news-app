@@ -1,55 +1,56 @@
-/* import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'; */
-import { Navbar, Footer, Header } from "../../component";
+import { getIronSession } from "pages/api/getSession";
+import { useUser } from "pages/api/users";
+import { Navbar, Footer, Header, Editor } from "../../component";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Fetcher from "../../lib/fetcher";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
 function AddArticle({ categories, error }) {
-  const router = useRouter();
-  const data = useSWR("../api/verify");
+  const [editorLoaded, setEditorLoaded] = useState(false);
+  const {session} = getIronSession();
+  const id_user = session?.id_user
+  const token_user = session?.token
+  /* const data = useSWR("../api/verify");
   const id_user = data?.data?.id_user;
-  const token_user = data?.data?.token;
-  console.log(id_user)
-  const [loading, setLoading] = useState(false)
+  const token_user = data?.data?.token; */
+  const [loading, setLoading] = useState(false);
   const [modifiedData, setModifiedData] = useState({
     title: "",
     text_news: "",
     category: "",
     poster: [],
   });
+  
+  useEffect(() => {
+    setEditorLoaded(true);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    const image = modifiedData.poster[0]
+    const image = modifiedData.poster[0];
     formData.append("title", modifiedData.title);
     formData.append("text_news", modifiedData.text_news);
     formData.append("category", modifiedData.category);
     formData.append("tags", modifiedData.category);
     formData.append("poster", image);
-    console.log(modifiedData.poster[0])
-   try {
-      /* const response = await addNews(
-        `http://localhost:3333/news/api/news/add-news/${id_user}`,
-        formData,
-        setLoading
-      ); */
+    console.log(modifiedData.poster[0]);
+    try {
       const response = await Fetcher({
-        method:'POST',
-        url:`${process.env.API_URL}/news/add-news/${id_user}`,
-        headers : {'user-token' : token_user},
-        data:formData,
-      })
+        method: "POST",
+        url: `${process.env.API_URL}/news/add-news/${id_user}`,
+        headers: { "user-token": token_user },
+        data: formData,
+      });
       console.log(response);
     } catch (error) {}
   };
   return (
     <>
-      <Header title="articles" url='../icon/Google.svg'/>
-      <Navbar state='articles' url='../api/verify'/>
+      <Header title="articles" url="../icon/Google.svg" />
+      <Navbar state="articles" url="../api/verify" path=".." />
       <section className="container-fluid p-0">
         <div className="d-flex justify-content-between m-5">
           <div>
@@ -64,7 +65,11 @@ function AddArticle({ categories, error }) {
           </div>
         </div>
         <div className="d-row">
-          <form encType="multipart/form-data" className="row px-3 w-100" onSubmit={(e)=>handleSubmit(e)}>
+          <form
+            encType="multipart/form-data"
+            className="row px-3 w-100"
+            onSubmit={(e) => handleSubmit(e)}
+          >
             <div className="col-12 col-lg-4">
               <div className="card mx-lg-3 mx-0">
                 <div className="dashes m-3 p-5">
@@ -82,7 +87,7 @@ function AddArticle({ categories, error }) {
                     onChange={(e) =>
                       setModifiedData({
                         ...modifiedData,
-                        poster: e.target.files
+                        poster: e.target.files,
                       })
                     }
                   />
@@ -101,7 +106,7 @@ function AddArticle({ categories, error }) {
                     onChange={(e) =>
                       setModifiedData({
                         ...modifiedData,
-                        title: e.target.value
+                        title: e.target.value,
                       })
                     }
                   />
@@ -110,46 +115,38 @@ function AddArticle({ categories, error }) {
                   <select
                     className="form-select"
                     aria-label="Default select example"
-                    onChange={(e)=>setModifiedData({...modifiedData, category:e.target.value})}
+                    onChange={(e) =>
+                      setModifiedData({
+                        ...modifiedData,
+                        category: e.target.value,
+                      })
+                    }
                   >
                     <option selected>Choose Categories</option>
-                    { categories.data &&
-                      categories.data.map(item =>(
-                      <option value={item.id}>{item.name_categories}</option>
-                    ))}
+                    {categories.data &&
+                      categories.data.map((item) => (
+                        <option value={item.id}>{item.name_categories}</option>
+                      ))}
                   </select>
                 </div>
               </div>
               <div className="card my-5 p-3">
-              {/* <CKEditor
-                    editor={ ClassicEditor }
-                    data="<p>Hello from CKEditor 5!</p>"
-                    onReady={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log( 'Editor is ready to use!', editor );
-                    } }
-                    onChange={ ( event, editor ) => {
-                        const data = editor.getData();
-                        console.log( { event, editor, data } );
-                    } }
-                    onBlur={ ( event, editor ) => {
-                        console.log( 'Blur.', editor );
-                    } }
-                    onFocus={ ( event, editor ) => {
-                        console.log( 'Focus.', editor );
-                    } }
-                /> */}
-                <div class="form-floating">
-                  <textarea
-                    class="form-control"
-                    placeholder="Leave a comment here"
-                    id="floatingTextarea"
-                    onChange={(e)=>setModifiedData({...modifiedData, text_news:e.target.value})}
-                  ></textarea>
-                  <label for="floatingTextarea">Text</label>
-                </div>
+                <Editor
+                  name="description"
+                  onChange={(e) => {
+                    setModifiedData({
+                        ...modifiedData,
+                        text_news: e,
+                      })
+                  }}
+                  editorLoaded={editorLoaded}
+                />
                 <div className="d-grid gap-2 mt-5">
-                  <button className="btn btn-dark" type="button" onClick={(e)=>handleSubmit(e)}>
+                  <button
+                    className="btn btn-dark"
+                    type="button"
+                    onClick={(e) => handleSubmit(e)}
+                  >
                     Request Publish Article
                   </button>
                 </div>
@@ -158,18 +155,17 @@ function AddArticle({ categories, error }) {
           </form>
         </div>
       </section>
-
       <Footer />
     </>
   );
 }
-AddArticle.getInitialProps = async ctx=>{
-  try{
+AddArticle.getInitialProps = async (ctx) => {
+  try {
     const res = await axios.get(`${process.env.API_URL}/categories/`);
-    const categories = res.data
-    return { categories }
-  } catch(error){
-    return{ error }
+    const categories = res.data;
+    return { categories };
+  } catch (error) {
+    return { error };
   }
-}
+};
 export default AddArticle;

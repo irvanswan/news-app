@@ -6,11 +6,9 @@ import TwitterLogin from "react-twitter-login";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { userLogin, googleLogin } from "../../lib/fetchUsers";
-import { verifyUser } from "../../lib/fetchUsers";
+import { userLogin, googleLogin, verifyUser } from "../../lib/fetchUsers";
 import useSWR from "swr";
 import Fetcher from "lib/fetcher";
-import axios from "axios";
 
 
 export default function Login() {
@@ -69,7 +67,7 @@ export default function Login() {
               ></div>
               <div className="col-12 col-sm-12 col-md-12 d-block col-lg-6">
                 <div className="mx-sm-5 mx-md-5 px-1 mt-3">
-                  <h1 className="fw-bold">Sign Up</h1>
+                  <h1 className="fw-bold">Sign In</h1>
                   <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="mb-3">
                       <label htmlFor="inputEmail" className="form-label">
@@ -129,7 +127,6 @@ export default function Login() {
                         <div className="px-5">
                           <FacebookLogin
                           clientId={`${process.env.FACEBOOK_CLIENT_ID}`}
-                          autoLoad={true}
                           fields="name,email,picture"
                           callback={responseFacebook} 
                           icon={<img src="./icon/Facebook.svg" className="icon" />}

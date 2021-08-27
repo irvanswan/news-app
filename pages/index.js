@@ -8,8 +8,6 @@ function Home(props) {
   const limit = 10
   const offset = 1
   const initialData = props.news;
-  //ini use sw
-  /* const { news: data } = fetchNews({limit:limit, offset : offset}) */
   const { data } = useSWR(null, Fetcher({method:'GET', url:`${process.env.API_URL}/news/`,params:{limit:limit, offset:offset}}), {
     initialData,
   });
@@ -18,7 +16,7 @@ function Home(props) {
   return (
     <>
       <Header title="Dashboard" />
-      <Navbar state='home'/>
+      <Navbar state='home' path="."/>
       <section className="container-fluid p-0 pt-5">
         <div className={styles.banner}>
           <div className="col-md-12 col-lg-5 my-5 p-5">
@@ -278,7 +276,7 @@ function Home(props) {
                         <img
                           src={`${process.env.API_URL_IMG}${item.poster}`}
                           alt="..."
-                          className={styles.poster}
+                          className={styles.pamflet}
                         />
                       </div>
                       <div className="col-7">
