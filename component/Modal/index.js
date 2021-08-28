@@ -1,1 +1,3 @@
-/* npk */
+import ModalSuccess from "./modalSuccess";
+
+export {ModalSuccess}

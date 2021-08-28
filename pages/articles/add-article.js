@@ -1,5 +1,5 @@
 import { getIronSession } from "pages/api/getSession";
-import { Navbar, Footer, Header, Editor } from "../../component";
+import { Navbar, Footer, Header, Editor, ModalSuccess } from "../../component";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Fetcher from "../../lib/fetcher";
@@ -10,17 +10,29 @@ function AddArticle({ categories, error }) {
   const id_user = session?.id_user
   const token_user = session?.token
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
   const [modifiedData, setModifiedData] = useState({
     title: "",
     text_news: "",
     category: "",
     poster: [],
   });
-  
+
   useEffect(() => {
     setEditorLoaded(true);
   }, []);
 
+  const handleChange = (e)=>{
+    let poster = document.getElementById('poster');
+    poster.src = URL.createObjectURL(e.target.files[0]);
+    setModifiedData({
+      ...modifiedData,
+      poster: e.target.files,
+    });
+    poster.onload = function(){
+      URL.revokeObjectURL(poster.src);
+    }
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -38,14 +50,14 @@ function AddArticle({ categories, error }) {
         headers: { "user-token": token_user },
         data: formData,
       });
-      console.log(response);
+      setShow(true);
     } catch (error) {}
   };
   return (
     <>
       <Header title="articles" url="../icon/Google.svg" />
       <Navbar state="articles" url="../api/verify" path=".." />
-      <section className="container-fluid p-0 pt-5">
+      <section className="container-fluid p-0 py-5">
         <div className="d-flex justify-content-between m-5">
           <div>
             <img src="../../icon/Back.svg" />
@@ -70,7 +82,8 @@ function AddArticle({ categories, error }) {
                   <img
                     src="../../icon/Plus.svg"
                     alt="..."
-                    className="mx-auto align-content-center"
+                    className="mx-auto align-content-center background vh-35 w-100"
+                    id='poster'
                   />
                 </div>
               </div>
@@ -78,12 +91,7 @@ function AddArticle({ categories, error }) {
                 <label className="btn btn-dark">
                   <input
                     type="file"
-                    onChange={(e) =>
-                      setModifiedData({
-                        ...modifiedData,
-                        poster: e.target.files,
-                      })
-                    }
+                    onChange={(e)=>handleChange(e)}
                   />
                   Choose Cover Photo
                 </label>
@@ -95,8 +103,8 @@ function AddArticle({ categories, error }) {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="First name"
-                    aria-label="First name"
+                    placeholder="Title"
+                    aria-label="Title"
                     onChange={(e) =>
                       setModifiedData({
                         ...modifiedData,
@@ -126,6 +134,7 @@ function AddArticle({ categories, error }) {
               </div>
               <div className="card my-5 p-3">
                 <Editor
+                  className = 'h-75'
                   name="description"
                   onChange={(e) => {
                     setModifiedData({
@@ -148,6 +157,7 @@ function AddArticle({ categories, error }) {
             </div>
           </form>
         </div>
+        <ModalSuccess isShow = {show}/>
       </section>
       <Footer />
     </>

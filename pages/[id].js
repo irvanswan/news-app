@@ -2,6 +2,7 @@ import { getNews } from "./api/news";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Header, Navbar, Footer } from "../component";
+import parse from 'html-react-parser'
 import moment from "moment";
 
 const DetailNews = () => {
@@ -18,7 +19,7 @@ const DetailNews = () => {
           <section className="px-5">
             <div className="d-flex flex-row pt-5">
               <div className="p-2">
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-between cursor-pointer" onClick={()=>router.back()}>
                   <img src="./icon/Back.svg" className="icon" />
                   <span className="ms-5 pt-0 d-none d-md-block">Back</span>
                 </div>
@@ -27,7 +28,7 @@ const DetailNews = () => {
                 <h3 className="text-center mx-auto">Article Viewer</h3>
               </div>
             </div>
-            <div className="row my-3">
+            <div className="row my-5">
               {news?.data &&
                 news?.data?.map((item) => (
                   <>
@@ -65,8 +66,8 @@ const DetailNews = () => {
                         Share Article Link
                       </button>
                     </div>
-                    <div className="col-12 mt-5">
-                      <span>{item.text_news}</span>
+                    <div className="col-12 mt-5 justify-content-between">
+                    {parse(`${item.text_news}`)}
                     </div>
                   </>
                 ))}

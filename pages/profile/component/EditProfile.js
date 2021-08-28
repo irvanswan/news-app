@@ -1,8 +1,7 @@
+import Link from "next/link";
 import { getIronSession } from "pages/api/getSession";
 import { useState, useEffect } from "react";
-import useSWR from "swr";
 import Fetcher from "../../../lib/fetcher";
-import { verifyUser } from "../../../lib/fetchUsers";
 import { useUser } from "../../api/users";
 
 const EditProfile = () => {
@@ -25,7 +24,7 @@ const EditProfile = () => {
   })
 
 	useEffect(()=>{
-    console.log('ini data buat updarte bg', id_user,token_user)
+    console.log('ini data buat update avatar', id_user,token_user)
     const formData = new FormData()
     if(photo.name != undefined){
       formData.append(`photo`, photo)
@@ -93,11 +92,11 @@ const EditProfile = () => {
       <div className="position-relative z1 h-auto">
         <div className="background vh-25">
           <img
-            src={
-              user?.data?.bg_profile != null
+            src={`${
+              user?.data?.bg_profile
                 ? `${process.env.API_URL_IMG}${user?.data?.bg_profile}`
                 : "./images/article.png"
-            }
+            }`}
             className="w-100"
           />
         </div>
@@ -211,12 +210,14 @@ const EditProfile = () => {
             </div>
             <div className="col-12 col-md-6">
               <div className="d-grid gap-2 pt-4">
+              <Link href="/articles/add-article">
                 <button
                   className="btn btn-blue btn-lg border-radius p-3 mb-3 shadow-sm"
                   type="button"
                 >
                   Request to be an author
                 </button>
+                </Link>
                 <button
                   className="btn btn-dark btn-lg border-radius p-3 mb-3 shadow-sm"
                   type="submit"

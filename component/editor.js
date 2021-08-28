@@ -24,6 +24,7 @@ export default function Editor({ onChange, editorLoaded, name, value }) {
             // console.log({ event, editor, data })
             onChange(data);
           }}
+          
         />
       ) : (
         <div>Editor loading</div>
