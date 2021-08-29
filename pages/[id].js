@@ -28,7 +28,7 @@ const DetailNews = () => {
                 <h3 className="text-center mx-auto">Article Viewer</h3>
               </div>
             </div>
-            <div className="row my-5">
+            <div className="row my-5 w-100">
               {news?.data &&
                 news?.data?.map((item) => (
                   <>
@@ -66,8 +66,8 @@ const DetailNews = () => {
                         Share Article Link
                       </button>
                     </div>
-                    <div className="col-12 mt-5 justify-content-between">
-                    {parse(`${item.text_news}`)}
+                    <div className="col-12 mt-5 card">
+                          {parse(`${item.text_news}`)}
                     </div>
                   </>
                 ))}
