@@ -1,5 +1,4 @@
 import axios from 'axios'
-import withSession from '../../lib/session'
 
 export default withSession(async (req, res) => {
   const { email, password } = await req.data

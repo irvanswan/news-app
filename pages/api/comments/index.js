@@ -1,8 +1,7 @@
 import useSWR from "swr";
 import Fetcher from "lib/fetcher";
 
-export const fetchComment = () =>{
-    export const getAllComment = (id_news)=>{
+export const getAllComment = (id_news)=>{
         const getComments = () =>Fetcher({
           method : 'GET',
           url : `${process.env.API_URL}/comments/${id_news}`,
@@ -17,5 +16,4 @@ export const fetchComment = () =>{
           errNews: error,
           loadNews: loading
         }
-      }
 }
