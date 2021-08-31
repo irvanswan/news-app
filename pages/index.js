@@ -2,6 +2,7 @@ import { Navbar, Footer, Header } from "../component";
 import styles from "../styles/Home.module.css";
 import useSWR from "swr";
 import Fetcher from "../lib/fetcher";
+import parse from 'html-react-parser'
 import Link from 'next/link'
 
 function Home(props) {
@@ -141,7 +142,7 @@ function Home(props) {
             <h4 className="p-5 bd-highlight fw-bold">Recommended</h4>
             <span className="p-5 bd-highlight text-info fw-bold">More</span>
           </div>
-          <div className="d-flex flex-row mb-5 px-0 mx-5">
+          <div className="d-flex flex-row mb-5 px-0 mx-5 overflow-hidden">
             <div className="card border-radius border-0 mx-3 shadow-lg">
               <div className="row">
                 <img
@@ -283,10 +284,7 @@ function Home(props) {
                         <div className="content ms-3 my-3">
                           <span className="text-blue">{item.title}</span>
                           <div className="d-flex flex-column bd-highlight mt-3">
-                            <div className="bd-highlight">{`${item.text_news.substring(
-                              0,
-                              50
-                            )}...`}</div>
+                            <div className="bd-highlight">{parse(`${item.text_news.substring(0, 50)}`)}</div>
                           </div>
                           <div className="mt-3">
                             <div className="d-flex justify-content-between">
