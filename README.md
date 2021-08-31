@@ -2,7 +2,7 @@
 News Web App Using Next JS & Bootstrap 5, We can post, comment, and like the article and save the article for you !
 
 ## Back End :
-[Back End](https://github.com/irvanswan/newsapp-backend)
+[Back End](https://github.com/irvanswan/news-backend)
 
 ## Requirement
 1. Bootstrap 5 (for library css)
