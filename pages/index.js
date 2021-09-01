@@ -12,6 +12,7 @@ function Home(props) {
   const { data } = useSWR(null, Fetcher({method:'GET', url:`${process.env.API_URL}/news/`,params:{limit:limit, offset:offset}}), {
     initialData,
   });
+  
   console.log(data)
 
   return (
