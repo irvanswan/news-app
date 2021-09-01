@@ -1,5 +1,5 @@
 import Head from 'next/head'
-export default function Header({title, url='./icon/Google.svg'}){
+export default function Header({title, url='./icon/News.svg'}){
     return(
       <Head>
         <title>{title}</title>
