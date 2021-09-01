@@ -11,12 +11,12 @@
 } */
 module.exports = {
     env: {
-        API_URL: 'https://newsapps-server.herokuapp.com/news/api',
-        API_URL_IMG: 'https://newsapps-server.herokuapp.com/',
-        ORIGIN_URL:'https://newsapps-server.herokuapp.com',
-        SECRET_COOKIE_PASSWORD: 'zj41^B$3yDp@R28VW@akXDQI4BMskEhs*Lx',
-        VERSION_STATE:'production',
-        GOOGLE_CLIENT_ID:'681983374499-1son4dkk5f6go6snifmarqsoegfr8il5.apps.googleusercontent.com',
-        FACEBOOK_CLIENT_ID:'576155690033340'
+        API_URL: process.env.NEXT_API_URL,
+        API_URL_IMG: process.env.NEXT_API_URL_IMG,
+        ORIGIN_URL: process.env.NEXT_ORIGIN_URL,
+        SECRET_COOKIE_PASSWORD: process.env.NEXT_SECRET_COOKIE_PASSWORD,
+        VERSION_STATE: process.env.NEXT_VERSION_STATE,
+        GOOGLE_CLIENT_ID: process.env.NEXT_GOOGLE_CLIENT_ID,
+        FACEBOOK_CLIENT_ID: process.env.NEXT_FACEBOOK_CLIENT_ID
     },
 }
