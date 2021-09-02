@@ -32,7 +32,7 @@ main{
 }
 .icon-1{
     width: 1.5em !important;
-    height: 1.5em !important;
+    height: 2em !important;
 }
 .photo{
     width: 2.5em !important;
@@ -41,6 +41,10 @@ main{
 .avatar{
     width: 6em !important;
     height: 6em !important;
+}
+.photo-sm{
+    width: 5em !important;
+    height: 5em !important;
 }
 .bg-grey{
     background-color: var(--customgrey) !important;
@@ -102,6 +106,9 @@ main{
  }
  .vh-35{
      height: 35vh;
+ }
+ .vh-40{
+     height: 40vh;
  }
 /*  .background label{
      z-index: 2;

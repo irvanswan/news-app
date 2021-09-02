@@ -47,7 +47,7 @@ const Navbar = (props) => {
     <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
       <div className="container-fluid">
         <Link href="/" className="cursor-pointer">
-          <h1 className="navbar-brand fw-bold" href="#">
+          <h1 className="navbar-brand fw-bold ms-5" href="#">
             News Today
           </h1>
         </Link>
@@ -67,28 +67,28 @@ const Navbar = (props) => {
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item mx-3 cursor-pointer">
+            <li className="nav-item mx-5 cursor-pointer">
               <Link href="/">
                 <span className="nav-link" aria-current="page" id="home">
                   Home
                 </span>
               </Link>
             </li>
-            <li className="nav-item mx-3 cursor-pointer">
+            <li className="nav-item mx-5 cursor-pointer">
               <Link href="/articles">
                 <span className="nav-link" href="#" id="articles">
                   Articles
                 </span>
               </Link>
             </li>
-            <li className="nav-item mx-3 cursor-pointer">
+            <li className="nav-item mx-5 cursor-pointer">
               <Link href="/category">
                 <span className="nav-link" href="#" id="category">
                   Category
                 </span>
               </Link>
             </li>
-            <li className="nav-item mx-3 cursor-pointer">
+            <li className="nav-item mx-5 cursor-pointer">
               <Link href="/about">
                 <span className="nav-link" href="#" id="about">
                   About
@@ -97,13 +97,17 @@ const Navbar = (props) => {
             </li>
           </ul>
           <form className="d-flex" onSubmit={(e) => handleSubmit(e)}>
-            <input
+          <div className="input-group input-group-lg border-radius-top my-2 mx-3">
+            <span className="input-group-text bg-transparent border-end-0" id="basic-addon1"><img src={`${props.path}/icon/Search.svg`}/></span>
+            <input type="search" className="form-control border-start-0" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1"/>
+          </div>
+          {/*   <input
               className="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
               onChange={(e) => setKey(e.target.value)}
-            />
+            /> */}
           </form>
           {session === null || session === undefined ? (
             <div className="d-flex flex-row">
@@ -123,7 +127,7 @@ const Navbar = (props) => {
               <div className="dropdown">
                 <img
                   src={`${props.path}/icon/Bell.svg`}
-                  className="icon-1 ms-2 mt-3 cursor-pointer dropdown-toggle"
+                  className="icon-1 ms-2 my-3 cursor-pointer dropdown-toggle"
                   id="dropdownMenuButton2"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -150,7 +154,7 @@ const Navbar = (props) => {
               </div>
               <div className="dropdown mx-3">
                 <div
-                  className="border border-2 rounded-circle p-1 ms-2"
+                  className="border border-2 rounded-circle p-1 m-2"
                   id="profile"
                 >
                   <img

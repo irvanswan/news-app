@@ -100,16 +100,16 @@ const EditProfile = () => {
             className="w-100"
           />
         </div>
-        <label className="text-center position-absolute top-50 start-50 translate-middle z2 bg-primary rounded-circle">
+        <label className="text-center position-absolute top-50 start-50 translate-middle z2">
           <input
             type="file"
             accept="image/png, image/jpeg"
             onChange={(e) => setBackground(e.target.files[0])}
           />
-          <img src="./icon/Pen.svg" className="m-2" />
+          <span className='m-2 text-muted border-info'>Change Background</span>
         </label>
         <label className="text-center position-absolute top-100 start-50 translate-middle z2">
-          <div className="btn-blue-light rounded-circle">
+          <div className="rounded-circle position-relative">
             <img
               src={`${
                 user?.data?.avatar
@@ -118,7 +118,7 @@ const EditProfile = () => {
               }`}
               className="avatar rounded-circle m-2"
             />
-            <div className="text-center position-absolute top-50 start-100 translate-middle z3 bg-primary rounded-circle">
+            <div className="text-center position-absolute start-100 top-100 translate-middle z3 bg-primary rounded-circle">
               <img src="./icon/Pen.svg" className="m-2" />
               <input
                 type="file"
@@ -132,7 +132,7 @@ const EditProfile = () => {
       <div className="container-fluid w-100 mx-0 mt-5 py-5">
         <form onSubmit={(e) => processUpdate(e)}>
           <div className="row mt-3 mb-2 px-3">
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-6 mb-4">
               <label className="ms-1">Username :</label>
               <input
                 type="text"
@@ -145,7 +145,7 @@ const EditProfile = () => {
                 }
               />
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-6 mb-4">
               <label className="ms-1">Name :</label>
               <input
                 type="text"
@@ -158,7 +158,7 @@ const EditProfile = () => {
                 }
               />
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-6 mb-4">
               <label className="ms-1">Email :</label>
               <input
                 type="email"
@@ -171,7 +171,7 @@ const EditProfile = () => {
                 }
               />
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-6 mb-4">
               <label className="ms-1">Password :</label>
               <input
                 type="password"
@@ -183,7 +183,7 @@ const EditProfile = () => {
                 }
               />
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-6 mb-4">
               <label className="ms-1">Job :</label>
               <input
                 type="text"
@@ -195,7 +195,7 @@ const EditProfile = () => {
                   setDataUser({ ...dataUser, job: e.target.value })
                 }
               />
-              <div className="mt-md-5 mt-0">
+              <div className="mt-md-5 mt-0 mb-4">
                 <label for="floatingTextarea2 ms-1">About :</label>
                 <textarea
                   className="form-control border-radius p-3"

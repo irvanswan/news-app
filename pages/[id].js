@@ -12,11 +12,11 @@ const DetailNews = () => {
   console.log(news);
   return (
     <>
-      <Header title={id} />
+      <Header title='News App' />
       <body>
         <Navbar state="home" path='.'/>
         <main className="mt-5">
-          <section className="px-5">
+          <section className="px-md-5 px-1 mx-md-4 mx-1">
             <div className="d-flex flex-row pt-5">
               <div className="p-2">
                 <div className="d-flex justify-content-between cursor-pointer" onClick={()=>router.back()}>
@@ -33,7 +33,7 @@ const DetailNews = () => {
                 news?.data?.map((item) => (
                   <>
                     <div className="col-12 col-md-6 px-3">
-                      <div className="background vh-35">
+                      <div className="background vh-40">
                         <img
                           src={`${process.env.API_URL_IMG}${item.poster}`}
                           className="w-100"
@@ -41,7 +41,7 @@ const DetailNews = () => {
                       </div>
                     </div>
                     <div className="col-12 col-md-6">
-                      <h3>{item.title}</h3>
+                      <h1 className='mb-4'>{item.title}</h1>
                       <small className="text-dark fw-bold text-capitalize">
                         {item.name} - {item.role}
                       </small>
@@ -51,13 +51,13 @@ const DetailNews = () => {
                           "dddd, MMMM Do YYYY"
                         )}
                       </small>
-                      <div className="d-flex">
+                      <div className="d-flex mt-3">
                         <div className="p-2 bd-highlight">
-                          <img src="./icon/Like.svg" alt="..." />
+                          <img src="./icon/Like.svg" alt="..."  className='icon-1'/>
                           <small> 2.1k</small>
                         </div>
                         <div className="p-2 bd-highlight">
-                          <img src="./icon/Borkmark.svg" alt="..." />
+                          <img src="./icon/Borkmark.svg" alt="..." className='icon-1'/>
                           <small> 2.1k</small>
                         </div>
                       </div>
@@ -66,7 +66,7 @@ const DetailNews = () => {
                         Share Article Link
                       </button>
                     </div>
-                    <div className="col-12 mt-5 card">
+                    <div className="col-12 mt-5 ms-3">
                           {parse(`${item.text_news}`)}
                     </div>
                   </>
