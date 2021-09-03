@@ -268,17 +268,17 @@ function Home(props) {
         </div>
         <div className="filter-tags p-0 p-lg-5">
           <h5 className="fw-bold">Latest News</h5>
-          <div className="row">
+          <div className="row mb-3">
             {data.data &&
               data.data.map((item) => (
-                <div className="col-12 col-lg-4">
-                  <div className="card border-radius border-0 m-3 shadow-lg">
+                <div className="col-12 col-lg-4 py-3">
+                  <div className="card border-radius border-0 m-3 shadow-lg h-100">
                     <div className="row">
-                      <div className="col-5">
+                      <div className={`col-5`}>
                         <img
                           src={`${process.env.API_URL_IMG}${item.poster}`}
                           alt="..."
-                          className={styles.pamflet}
+                          className={`border-radius h-100 w-100`}
                         />
                       </div>
                       <div className="col-7">

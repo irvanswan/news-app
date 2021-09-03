@@ -96,33 +96,23 @@ const Navbar = (props) => {
               </Link>
             </li>
           </ul>
-          <form className="d-flex" onSubmit={(e) => handleSubmit(e)}>
-          <div className="input-group input-group-lg border-radius-top my-2 mx-3">
-            <span className="input-group-text bg-transparent border-end-0" id="basic-addon1"><img src={`${props.path}/icon/Search.svg`}/></span>
-            <input type="search" className="form-control border-start-0" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1"/>
-          </div>
-          {/*   <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              onChange={(e) => setKey(e.target.value)}
-            /> */}
-          </form>
           {session === null || session === undefined ? (
-            <div className="d-flex flex-row">
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end me-md-5 me-0">
               <Link href="/register">
-                <button className="btn mx-5 bg-transparent cursor-pointer">
-                  Sign up
-                </button>
+                <button className="btn me-md-3 me-0 fw-bold" type="button">Sign Up</button>
               </Link>
               <Link href="/login">
-                <button className="btn btn-blue cursor-pointer" type="submit">
-                  Login
-                </button>
+                <button className="btn me-md-5 me-0 btn-blue" type="button">Login</button>
               </Link>
             </div>
           ) : (
+            <>
+            <form className="d-flex" onSubmit={(e) => handleSubmit(e)}>
+              <div className="input-group input-group-lg border-radius-top my-2 mx-3">
+                <span className="input-group-text bg-transparent border-end-0" id="basic-addon1"><img src={`${props.path}/icon/Search.svg`}/></span>
+                <input type="search" className="form-control border-start-0" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1"/>
+              </div>
+            </form>
             <div className="d-flex flex-row">
               <div className="dropdown">
                 <img
@@ -202,6 +192,7 @@ const Navbar = (props) => {
                 </div>
               </div>
             </div>
+            </>
           )}
         </div>
       </div>

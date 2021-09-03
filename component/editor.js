@@ -12,7 +12,7 @@ export default function Editor({ onChange, editorLoaded, name, value }) {
   }, []);
 
   return (
-    <div>
+    <div style={{height : '250px'}}>
       {editorLoaded ? (
         <CKEditor
           type=""
@@ -24,7 +24,6 @@ export default function Editor({ onChange, editorLoaded, name, value }) {
             // console.log({ event, editor, data })
             onChange(data);
           }}
-          
         />
       ) : (
         <div>Editor loading</div>

@@ -102,7 +102,7 @@ function AddArticle({ categories, error }) {
                 <div className="col">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control border-info border-radius py-3"
                     placeholder="Title"
                     aria-label="Title"
                     onChange={(e) =>
@@ -115,7 +115,7 @@ function AddArticle({ categories, error }) {
                 </div>
                 <div className="col">
                   <select
-                    className="form-select"
+                    className="form-select border-info border-radius py-3"
                     aria-label="Default select example"
                     onChange={(e) =>
                       setModifiedData({
@@ -132,9 +132,9 @@ function AddArticle({ categories, error }) {
                   </select>
                 </div>
               </div>
-              <div className="card my-5 p-3">
+              <div className="my-5">
                 <Editor
-                  className = 'h-75'
+                  className='h-100'
                   name="description"
                   onChange={(e) => {
                     setModifiedData({
