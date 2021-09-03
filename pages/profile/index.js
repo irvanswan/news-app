@@ -120,11 +120,20 @@ console.log(menu)
                     </span>
                   </div>
                   <label className="text-center position-absolute top-100 start-50 translate-middle z2">
-                    <div className="btn-blue border-radius position-relative">
+                    <div className="bg-primary border-radius position-relative">
                       <div class="d-flex align-items-center">
-                        <div class="p-2 bd-highlight w-auto fw-bolder bg-primary border-radius">52 Post</div>
-                        <div class="p-2 bd-highlight w-auto fw-bolder">250  Visitor</div>
-                        <div class="p-2 bd-highlight w-auto fw-bolder">4.5K Comment</div>
+                        <div className='p-2 bd-highlight item-box fw-bolder text-white btn-blue border-radius'>
+                          <small>52</small><br/>
+                          <small>Post</small>
+                        </div>
+                        <div className="p-2 bd-highlight item-box fw-bolder text-white">
+                          <small>250</small><br/>
+                          <small>Visitor</small>
+                        </div>
+                        <div className='p-2 bd-highlight item-box fw-bolder text-white'>
+                          <small>4.5K</small><br/>
+                          <small>Comment</small>
+                        </div>
                       </div>
                     </div>
                   </label>

@@ -7,6 +7,11 @@
     --custombluelight : #5282FF17 !important;
     --customgrey : #D7DDEC !important;
 }
+.item-box{
+    height: 100%;
+    width: 6em;
+    display: block;
+}
 body{
     box-sizing: border-box !important;
 }
