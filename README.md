@@ -4,8 +4,6 @@ News Web App Using Next JS & Bootstrap 5, We can post, comment, and like the art
 ## Resources :
 ### Back End
 [Back End](https://github.com/irvanswan/news-backend)
-### WIKI
-[Wiki](https://glorious-search-1b3.notion.site/ADVANCE-WEEK-4-Optimation-query-Ruesable-Component-S-O-L-I-D-backend-news-app-2c6aeabd9446413799a54ac198e915e0)
 
 ## Requirement
 1. Bootstrap 5 (for library css)
