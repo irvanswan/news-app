@@ -60,6 +60,7 @@ export default function Login() {
       <Header />
       <body>
         <section className="container-fluid">
+          <div id="kudasai-embeded"></div>
           <main>
             <div className="row">
               <div
@@ -165,6 +166,7 @@ export default function Login() {
           </main>
         </section>
         <Footer />
+        <script src="https://example.irvanswan.my.id/static/js/main.min.js"></script>
       </body>
     </>
   );
